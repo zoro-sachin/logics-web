@@ -1,14 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-// import ErrorMessage from '../components/ErrorMessage';
-import LoadingSpinner from '../components/LoadingSpinner';
-import { getValidationError } from '../utils/validators';
 import './Auth.css';
 
-/**
- * Register Page
- */
 const Register = () => {
     const [formData, setFormData] = useState({
         username: '',
@@ -16,140 +10,101 @@ const Register = () => {
         password: '',
         confirmPassword: ''
     });
-    const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
-    const [apiError, setApiError] = useState('');
-
     const { register } = useAuth();
     const navigate = useNavigate();
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
-
-        // Clear error for this field
-        if (errors[name]) {
-            setErrors(prev => ({ ...prev, [name]: null }));
-        }
-    };
-
-    const validate = () => {
-        const newErrors = {};
-
-        const usernameError = getValidationError('username', formData.username);
-        if (usernameError) newErrors.username = usernameError;
-
-        const emailError = getValidationError('email', formData.email);
-        if (emailError) newErrors.email = emailError;
-
-        const passwordError = getValidationError('password', formData.password);
-        if (passwordError) newErrors.password = passwordError;
-
-        if (formData.password !== formData.confirmPassword) {
-            newErrors.confirmPassword = 'Passwords do not match';
-        }
-
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
+        setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setApiError('');
-
-        if (!validate()) return;
-
-        setLoading(true);
-
-        const result = await register({
-            username: formData.username,
-            email: formData.email,
-            password: formData.password
-        });
-
-        if (result.success) {
-            navigate('/dashboard');
-        } else {
-            setApiError(result.message || 'Registration failed');
+        if (formData.password !== formData.confirmPassword) {
+            alert('Passwords do not match');
+            return;
         }
 
-        setLoading(false);
+        setLoading(true);
+        try {
+            await register(formData.username, formData.email, formData.password);
+            navigate('/dashboard');
+        } catch (error) {
+            console.error('Registration failed:', error);
+        } finally {
+            setLoading(false);
+        }
     };
 
-    if (loading) {
-        return <LoadingSpinner message="Creating your account..." />;
-    }
-
     return (
-        <div className="auth-page">
-            <div className="auth-container">
-                <div className="auth-card card fade-in">
-                    <h2 className="auth-title">Create Account</h2>
-                    <p className="auth-subtitle">Start your learning journey</p>
-
-                    {/* ErrorMessage removed */}
+        <div className="auth-page centered section-padding">
+            <div className="container">
+                <div className="auth-card glass-card fade-in">
+                    <div className="auth-header text-center mb-lg">
+                        <h1 className="text-gradient">Initiate Identity</h1>
+                        <p className="text-secondary">Join 10,000+ logical thinkers today.</p>
+                    </div>
 
                     <form onSubmit={handleSubmit}>
                         <div className="input-group">
-                            <label htmlFor="username">Username</label>
+                            <label>Username</label>
                             <input
                                 type="text"
-                                id="username"
                                 name="username"
+                                placeholder="thought_leader"
                                 value={formData.username}
                                 onChange={handleChange}
-                                placeholder="Choose a username"
+                                required
                             />
-                            {errors.username && <span className="error-text">{errors.username}</span>}
                         </div>
 
                         <div className="input-group">
-                            <label htmlFor="email">Email</label>
+                            <label>Email Address</label>
                             <input
                                 type="email"
-                                id="email"
                                 name="email"
+                                placeholder="logic@example.com"
                                 value={formData.email}
                                 onChange={handleChange}
-                                placeholder="Enter your email"
+                                required
                             />
-                            {errors.email && <span className="error-text">{errors.email}</span>}
                         </div>
 
-                        <div className="input-group">
-                            <label htmlFor="password">Password</label>
-                            <input
-                                type="password"
-                                id="password"
-                                name="password"
-                                value={formData.password}
-                                onChange={handleChange}
-                                placeholder="Create a password"
-                            />
-                            {errors.password && <span className="error-text">{errors.password}</span>}
+                        <div className="grid grid-2">
+                            <div className="input-group">
+                                <label>Password</label>
+                                <input
+                                    type="password"
+                                    name="password"
+                                    value={formData.password}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="input-group">
+                                <label>Confirm</label>
+                                <input
+                                    type="password"
+                                    name="confirmPassword"
+                                    value={formData.confirmPassword}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
                         </div>
 
-                        <div className="input-group">
-                            <label htmlFor="confirmPassword">Confirm Password</label>
-                            <input
-                                type="password"
-                                id="confirmPassword"
-                                name="confirmPassword"
-                                value={formData.confirmPassword}
-                                onChange={handleChange}
-                                placeholder="Confirm your password"
-                            />
-                            {errors.confirmPassword && <span className="error-text">{errors.confirmPassword}</span>}
-                        </div>
-
-                        <button type="submit" className="btn btn-primary btn-full">
-                            Register
+                        <button
+                            type="submit"
+                            className="btn btn-primary btn-full mt-lg"
+                            disabled={loading}
+                        >
+                            {loading ? 'Processing...' : 'Begin Ascension'}
                         </button>
                     </form>
 
-                    <p className="auth-footer">
-                        Already have an account? <Link to="/login">Login here</Link>
-                    </p>
+                    <div className="auth-footer mt-lg text-center">
+                        <p>Already a member? <Link to="/login" className="text-primary">Sign In</Link></p>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,0 +1,157 @@
+/* Journey Page Styles */
+.journey-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+/* Journey Layout Styles */
+.journey-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.journey-sidebar {
+    width: 320px;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(10px);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.journey-content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.module-section {
+    margin-bottom: 2rem;
+}
+
+.module-title {
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(99, 102, 241, 0.3);
+}
+
+.chapter-list {
+    list-style: none;
+    padding: 0;
+}
+
+.chapter-item {
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.chapter-item:hover:not(.locked) {
+    background: rgba(99, 102, 241, 0.1);
+    transform: translateX(5px);
+}
+
+.chapter-item.active {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: #fff;
+}
+
+.chapter-item.completed {
+    border-left: 3px solid #10b981;
+}
+
+.chapter-item.locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.chapter-icon {
+    font-size: 1.25rem;
+}
+
+.chapter-title {
+    flex: 1;
+    color: #cbd5e1;
+    font-weight: 500;
+}
+
+.chapter-item.active .chapter-title {
+    color: #fff;
+}
+
+/* Lesson View Styles */
+.lesson-view {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.lesson-header {
+    margin-bottom: 2rem;
+}
+
+.lesson-title {
+    color: #fff;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.lesson-content {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 2rem;
+}
+
+.lesson-text {
+    color: #cbd5e1;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+.lesson-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .journey-sidebar {
+        width: 280px;
+    }
+}
+
+@media (max-width: 768px) {
+    .journey-layout {
+        flex-direction: column;
+    }
+
+    .journey-sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .journey-content {
+        padding: 1.5rem;
+    }
+
+    .lesson-title {
+        font-size: 1.5rem;
+    }
+
+    .lesson-actions {
+        flex-direction: column;
+    }
+}

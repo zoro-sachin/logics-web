@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import JourneyLayout from '../components/JourneyLayout';
 import LessonView from '../components/LessonView';
+import './JourneyPage.css';
 
 const JourneyPage = () => {
     const { courseId, sectionId } = useParams();

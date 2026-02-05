@@ -1,106 +1,89 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaBrain, FaChartLine, FaTrophy, FaCertificate, FaLightbulb } from 'react-icons/fa';
+import { FaBrain, FaRocket, FaTrophy, FaChartLine } from 'react-icons/fa';
 import Footer from '../components/Footer';
 import './Landing.css';
 
-/**
- * Landing Page
- */
 const Landing = () => {
     return (
         <div className="landing-page">
-            {/* Hero Section */}
-            <section className="hero">
+            <section className="hero-section">
+                <div className="hero-bg-glow"></div>
                 <div className="container">
                     <div className="hero-content fade-in">
+                        <div className="badge badge-primary mb-md">V2.0 is Live</div>
                         <h1 className="hero-title">
-                            Master the Art of <span className="text-gradient">Logical Thinking</span>
+                            Evolve Your <span className="text-gradient">Logical Intelligence</span>
                         </h1>
                         <p className="hero-subtitle">
-                            Challenge your mind with expert-curated puzzles, daily streaks, and personalized learning paths designed for the modern logical thinker.
+                            Master the art of problem solving through expert-curated challenges and
+                            real-time cognitive analytics. No more AI genericism. Just pure logic.
                         </p>
-                        <div className="hero-buttons">
-                            <Link to="/register" className="btn btn-primary btn-large">
-                                Get Started Free
+                        <div className="hero-actions">
+                            <Link to="/register" className="btn btn-primary btn-lg">
+                                Get Started Free <FaRocket />
                             </Link>
-                            <Link to="/login" className="btn btn-outline-white btn-large">
-                                Sign In
+                            <Link to="/login" className="btn btn-outline btn-lg">
+                                Resume Journey
                             </Link>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Features Section */}
-            <section className="features">
+            <section className="features-section section-padding">
                 <div className="container">
-                    <div className="section-header">
-                        <h2 className="section-title">Elevate Your IQ</h2>
-                        <p className="section-subtitle">Everything you need to sharpen your cognitive abilities in one place.</p>
+                    <div className="text-center mb-xl">
+                        <h2 className="section-title h1 mb-sm">Engineered for Excellence</h2>
+                        <p className="text-secondary max-w-md mx-auto">
+                            A scientific approach to cognitive development, focusing on structured
+                            progression and deep learning.
+                        </p>
                     </div>
 
-                    <div className="features-grid">
-                        <div className="feature-card">
-                            <div className="feature-icon">
-                                <FaLightbulb />
-                            </div>
-                            <h3>Dynamic Challenges</h3>
-                            <p>Our curriculum scales in complexity as you improve, ensuring you're always in the 'flow' state.</p>
-                        </div>
-
-                        <div className="feature-card">
-                            <div className="feature-icon">
+                    <div className="grid grid-3">
+                        <div className="glass-card feature-card">
+                            <div className="feature-icon-wrapper">
                                 <FaBrain />
                             </div>
-                            <h3>Adaptive Learning</h3>
-                            <p>Question selection that adjusts to your skill level, providing the perfect balance of challenge and growth.</p>
+                            <h3>Adaptive Paths</h3>
+                            <p>Our algorithms track your precision and speed to calibrate the perfect difficulty curve.</p>
                         </div>
 
-                        <div className="feature-card">
-                            <div className="feature-icon">
+                        <div className="glass-card feature-card">
+                            <div className="feature-icon-wrapper">
                                 <FaChartLine />
                             </div>
-                            <h3>Deep Analytics</h3>
-                            <p>Visualize your cognitive growth with detailed radar charts and activity heatmaps updated in real-time.</p>
+                            <h3>Cognitive Analytics</h3>
+                            <p>Visualise your growth with heatmaps and radar charts tracking 5 core logic domains.</p>
                         </div>
 
-                        <div className="feature-card">
-                            <div className="feature-icon">
+                        <div className="glass-card feature-card">
+                            <div className="feature-icon-wrapper">
                                 <FaTrophy />
                             </div>
-                            <h3>Competitive Edge</h3>
-                            <p>Climb the global leaderboard and see how your logical deduction skills rank against the best minds.</p>
-                        </div>
-
-                        <div className="feature-card">
-                            <div className="feature-icon">
-                                <FaCertificate />
-                            </div>
-                            <h3>Proof of Mastery</h3>
-                            <p>Earn verifiable certificates as you complete modules and reach expert levels in various logic domains.</p>
-                        </div>
-
-                        <div className="feature-card">
-                            <div className="feature-icon">
-                                <FaBrain />
-                            </div>
-                            <h3>Modular Learning</h3>
-                            <p>From number sequences to complex puzzles—explore specialized courses tailored to your goals.</p>
+                            <h3>Global Rankings</h3>
+                            <p>Compete with a global community of thinkers and earn prestige through consistent mastery.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* CTA Section */}
-            <section className="cta">
-                <div className="container text-center">
-                    <div className="cta-content">
-                        <h2>Ready to Start Your Journey?</h2>
-                        <p>Join a community of thousands improving their problem-solving skills every day.</p>
-                        <Link to="/register" className="btn btn-primary btn-large">
-                            Start Practicing Now
-                        </Link>
+            <section className="stats-section">
+                <div className="container">
+                    <div className="glass stats-grid">
+                        <div className="stat-item">
+                            <h2 className="stat-number">500+</h2>
+                            <p className="stat-label">Curated Questions</p>
+                        </div>
+                        <div className="stat-item border-x">
+                            <h2 className="stat-number">10k+</h2>
+                            <p className="stat-label">Analytical Sprints</p>
+                        </div>
+                        <div className="stat-item">
+                            <h2 className="stat-number">99.9%</h2>
+                            <p className="stat-label">Uptime Stability</p>
+                        </div>
                     </div>
                 </div>
             </section>

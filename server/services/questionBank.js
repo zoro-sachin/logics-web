@@ -221,7 +221,26 @@ const easyQuestions = [
   { q: 'No reptiles have fur. Snake has fur?', a: 'No', opts: ['Yes', 'No', 'Maybe', 'Cannot tell'], category: 'reasoning' },
   { q: 'All squares are rectangles. Figure rect?', a: 'Cannot determine', opts: ['Yes', 'No', 'Cannot determine', 'Maybe'], category: 'reasoning' },
   { q: 'Some birds fly. All birds fly?', a: 'No', opts: ['Yes', 'No', 'Cannot determine', 'Maybe'], category: 'reasoning' },
-  { q: 'If rain then wet. Ground wet?', a: 'Cannot determine', opts: ['Yes', 'No', 'Cannot determine', 'Maybe'], category: 'reasoning' }
+  { q: 'If rain then wet. Ground wet?', a: 'Cannot determine', opts: ['Yes', 'No', 'Cannot determine', 'Maybe'], category: 'reasoning' },
+
+  // EASY - BOOLEAN LOGIC (20 questions)
+  { q: 'What is the value of: !true', a: 'false', opts: ['true', 'false', 'undefined', 'null'], category: 'boolean-logic' },
+  { q: 'What is (true && false)?', a: 'false', opts: ['true', 'false', '1', '0'], category: 'boolean-logic' },
+  { q: 'What is (true || false)?', a: 'true', opts: ['true', 'false', '1', '0'], category: 'boolean-logic' },
+  { q: 'Result of: !(false || false)', a: 'true', opts: ['true', 'false', 'error', '0'], category: 'boolean-logic' },
+  { q: 'Result of: (true && true) && false', a: 'false', opts: ['true', 'false', 'null', '1'], category: 'boolean-logic' },
+  { q: 'If x=true, what is !(!x)?', a: 'true', opts: ['true', 'false', 'undefined', 'x'], category: 'boolean-logic' },
+  { q: 'What is (1 == "1") in JS logic?', a: 'true', opts: ['true', 'false', 'error', 'undefined'], category: 'boolean-logic' },
+  { q: 'Result of: false && true || true', a: 'true', opts: ['true', 'false', '0', 'undefined'], category: 'boolean-logic' },
+  { q: 'What is !!1?', a: 'true', opts: ['true', 'false', '1', '0'], category: 'boolean-logic' },
+  { q: 'What is !!0?', a: 'false', opts: ['true', 'false', '1', '0'], category: 'boolean-logic' },
+
+  // EASY - ALGORITHMIC LOGIC (15 questions)
+  { q: 'Step 1: X=5. Step 2: X=X+2. What is X?', a: '7', opts: ['5', '7', '10', '2'], category: 'algorithmic-logic' },
+  { q: 'Start = 10. Repeat 3 times: subtract 2. Result?', a: '4', opts: ['8', '6', '4', '2'], category: 'algorithmic-logic' },
+  { q: 'If Input=3, Step: Result=Input*Input. Result?', a: '9', opts: ['6', '9', '12', '3'], category: 'algorithmic-logic' },
+  { q: 'Loop: For i=1 to 3, Sum = Sum + 1. If start Sum=0, final Sum?', a: '3', opts: ['1', '2', '3', '4'], category: 'algorithmic-logic' },
+  { q: 'If X > 10 return "High" else "Low". If X is 5?', a: 'Low', opts: ['High', 'Low', '5', 'Error'], category: 'algorithmic-logic' }
 ];
 
 const mediumQuestions = [
@@ -451,7 +470,27 @@ const mediumQuestions = [
   { q: 'All teachers work. Some teachers happy?', a: 'Cannot determine', opts: ['Yes', 'No', 'Cannot determine', 'Maybe'], category: 'reasoning' },
   { q: 'No fool is wise. Foolish not wise?', a: 'Yes', opts: ['Yes', 'No', 'Cannot determine', 'Maybe'], category: 'reasoning' },
   { q: 'If morning then breakfast. Breakfast cooked?', a: 'Cannot determine', opts: ['Must be morning', 'Might be morning', 'Cannot determine', 'Not morning'], category: 'reasoning' },
-  { q: 'Some rich are happy. All rich happy?', a: 'No', opts: ['Yes', 'No', 'Cannot determine', 'Maybe'], category: 'reasoning' }
+  { q: 'Some rich are happy. All rich happy?', a: 'No', opts: ['Yes', 'No', 'Cannot determine', 'Maybe'], category: 'reasoning' },
+
+  // MEDIUM - BOOLEAN LOGIC
+  { q: 'Value of: (true && false) || (true && true)', a: 'true', opts: ['true', 'false', 'null', 'undefined'], category: 'boolean-logic' },
+  { q: 'Result of: !( (true || false) && (false && true) )', a: 'true', opts: ['true', 'false', 'null', '0'], category: 'boolean-logic' },
+  { q: 'If A=true, B=false, what is A && !B?', a: 'true', opts: ['true', 'false', 'A', 'B'], category: 'boolean-logic' },
+  { q: 'What is (null || "Hello") in logical evaluation?', a: 'Hello', opts: ['null', 'Hello', 'true', 'false'], category: 'boolean-logic' },
+  { q: 'Value of: (5 > 3) && (2 < 1)', a: 'false', opts: ['true', 'false', '5', '1'], category: 'boolean-logic' },
+
+  // MEDIUM - ALGORITHMIC LOGIC
+  { q: 'X=10, Y=2. While X > 5: X = X-Y. Final X?', a: '4', opts: ['4', '6', '5', '2'], category: 'algorithmic-logic' },
+  { q: 'If Input=4, Result=1. For i=1 to Input: Result=Result*i. Final Result?', a: '24', opts: ['24', '16', '12', '4'], category: 'algorithmic-logic' },
+  { q: 'A=5, B=10. Temp=A, A=B, B=Temp. What is B?', a: '5', opts: ['5', '10', '15', '0'], category: 'algorithmic-logic' },
+
+  // DECEPTIVE LOGIC (Lateral Thinking)
+  { q: 'How many months have 28 days?', a: 'All 12', opts: ['Only 1', 'All 12', 'The leap ones', '6'], category: 'puzzles' },
+  { q: 'If you take 2 apples from 3, how many do you have?', a: '2', opts: ['1', '2', '3', '0'], category: 'puzzles' },
+  { q: 'A man builds a house with 4 sides of southern exposure. A bear walks by. Color?', a: 'White', opts: ['Black', 'Brown', 'White', 'Blue'], category: 'puzzles' },
+  { q: 'If you are in a race and you pass the person in second place, what place are you in?', a: '2nd', opts: ['1st', '2nd', '3rd', 'Last'], category: 'puzzles' },
+  { q: 'What belongs to you but others use it more?', a: 'Your Name', opts: ['Money', 'Phone', 'Your Name', 'Car'], category: 'puzzles' },
+  { q: 'A farmer has 17 sheep. All but 9 die. How many are left?', a: '9', opts: ['8', '17', '9', '0'], category: 'puzzles' }
 ];
 
 const hardQuestions = [
@@ -613,7 +652,20 @@ const hardQuestions = [
   { q: 'All honest are trusted. Trusted person honest?', a: 'No', opts: ['Yes', 'No', 'Cannot determine', 'Maybe'], category: 'reasoning' },
   { q: 'If A then B. Not B means not A?', a: 'Yes', opts: ['Yes', 'No', 'Cannot determine', 'Maybe'], category: 'reasoning' },
   { q: 'Some fruits sweet. All sweet delicious?', a: 'Cannot determine', opts: ['Yes', 'No', 'Cannot determine', 'Maybe'], category: 'reasoning' },
-  { q: 'All birds have wings. Can fly means bird?', a: 'No', opts: ['Yes', 'No', 'Cannot determine', 'Maybe'], category: 'reasoning' }
+  { q: 'All birds have wings. Can fly means bird?', a: 'No', opts: ['Yes', 'No', 'Cannot determine', 'Maybe'], category: 'reasoning' },
+
+  // HARD - BOOLEAN LOGIC
+  { q: 'Value of: !(A && B) == (!A || !B)', a: 'true', opts: ['true', 'false', 'depends', 'error'], category: 'boolean-logic' },
+  { q: 'If A=true, B=false, C=true. Value of: (A && B) || (C && !B)', a: 'true', opts: ['true', 'false', 'A', 'null'], category: 'boolean-logic' },
+  { q: 'Result of: !!undefined || "Data"', a: 'Data', opts: ['true', 'false', 'Data', 'undefined'], category: 'boolean-logic' },
+  { q: 'Result of: (true || false) && (false || true) && !false', a: 'true', opts: ['true', 'false', 'error', 'null'], category: 'boolean-logic' },
+
+  // HARD - ALGORITHMIC LOGIC
+  { q: 'Recursive: F(0)=1, F(n)=n*F(n-1). What is F(3)?', a: '6', opts: ['3', '6', '9', '2'], category: 'algorithmic-logic' },
+  { q: 'X=1. For i=1 to 4: If i%2==0: X=X*2 else: X=X+1. Final X?', a: '6', opts: ['4', '6', '8', '10'], category: 'algorithmic-logic' },
+  { q: 'Process: A=1, B=2. Loop 3x: { A=A+B, B=A-B }. Final A?', a: '8', opts: ['5', '8', '13', '3'], category: 'algorithmic-logic' },
+  { q: 'Constraint: A must sit next to B. C cannot sit next to A. If B is in seat 2, where is A?', a: '1 or 3', opts: ['1 or 3', 'Only 1', 'Only 3', 'Cannot sit'], category: 'reasoning' },
+  { q: 'Logic: Only one statement is true. 1: A is a liar. 2: B is a liar. 3: Neither are liars. Who is honest?', a: 'Cannot determine', opts: ['A', 'B', 'Neither', 'Cannot determine'], category: 'reasoning' }
 ];
 
 // Build comprehensive question bank

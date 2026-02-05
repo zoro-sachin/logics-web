@@ -1,0 +1,278 @@
+/* Journey Layout & Theme Support */
+.journey-layout {
+    display: flex;
+    height: calc(100vh - 80px);
+    overflow: hidden;
+    background: var(--bg-deep);
+    color: var(--text-primary);
+}
+
+.journey-aside {
+    width: 320px;
+    height: 100%;
+    border-right: 1px solid var(--border-glass);
+    background: var(--bg-surface);
+    z-index: 50;
+    transition: all 0.3s ease;
+}
+
+.journey-main {
+    flex: 1;
+    overflow-y: auto;
+    padding: 3rem;
+    background: var(--bg-deep);
+}
+
+/* Sidebar V2 - Coddy Style */
+.journey-sidebar-v2 {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.sidebar-header-v2 {
+    padding: 2rem;
+    border-bottom: 1px solid var(--border-glass);
+}
+
+.course-badge {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: var(--primary);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-header-v2 h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.journey-progress-mini {
+    margin-top: 1rem;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+}
+
+.progress-track {
+    height: 4px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+[data-theme='dark'] .progress-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--grad-main);
+    border-radius: 10px;
+}
+
+.sidebar-content {
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 2rem;
+}
+
+.module-group {
+    margin-top: 1.5rem;
+}
+
+.module-header-v2 {
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.module-count {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--text-muted);
+}
+
+.module-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+}
+
+.module-title-v2 {
+    padding: 0 2rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.chapter-stack {
+    display: flex;
+    flex-direction: column;
+}
+
+.chapter-node {
+    padding: 0.875rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    border-left: 2px solid transparent;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.chapter-node:hover:not(.locked) {
+    background: rgba(var(--primary-glow), 0.05);
+    color: var(--primary);
+}
+
+.chapter-node.active {
+    background: var(--primary-glow);
+    border-left-color: var(--primary);
+    color: var(--primary);
+}
+
+.chapter-node.locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.chapter-status {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+}
+
+.chapter-status .dot {
+    width: 6px;
+    height: 6px;
+    background: var(--text-muted);
+    border-radius: 50%;
+}
+
+.chapter-node.active .dot {
+    background: var(--primary);
+    box-shadow: 0 0 8px var(--primary);
+}
+
+.chapter-node.done {
+    color: var(--primary);
+}
+
+.chapter-info-v2 {
+    display: flex;
+    flex-direction: column;
+}
+
+.chapter-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.active-marker {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: 2px;
+    opacity: 0.8;
+}
+
+/* Lesson Content - Coddy Style */
+.lesson-card-v2 {
+    max-width: 800px;
+    margin: 0 auto;
+    animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.lesson-content-v2 h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+.lesson-text-v2 {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 3rem;
+}
+
+.practice-cta-v2 {
+    padding: 2.5rem;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cta-left h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Toggle Sidebar Mobile */
+.sidebar-toggle-v2 {
+    position: fixed;
+    top: 100px;
+    left: 20px;
+    z-index: 100;
+    background: var(--primary);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-neon);
+}
+
+@media (max-width: 1024px) {
+    .journey-aside {
+        position: fixed;
+        left: -320px;
+        top: 80px;
+        height: calc(100vh - 80px);
+    }
+
+    .journey-aside.open {
+        left: 0;
+    }
+
+    .sidebar-toggle-v2 {
+        display: flex;
+    }
+}

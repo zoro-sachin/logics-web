@@ -75,6 +75,27 @@ const userSchema = new mongoose.Schema({
     lastActiveDate: {
         type: Date,
         default: null
+    },
+    // Games tracking
+    gamesPlayed: [{
+        gameType: String,
+        totalPlayed: { type: Number, default: 0 },
+        bestScore: { type: Number, default: 0 },
+        avgAccuracy: { type: Number, default: 0 }
+    }],
+    // Knowledge vault progress
+    knowledgeProgress: {
+        topicsRead: [String],
+        lastReadTopic: String,
+        totalTimeSpent: { type: Number, default: 0 }
+    },
+    lastActive: {
+        type: Date,
+        default: Date.now
+    },
+    totalPoints: {
+        type: Number,
+        default: 0
     }
 }, {
     timestamps: true // Adds createdAt and updatedAt fields

@@ -15,36 +15,40 @@ const Leaderboard = () => {
     return (
         <div className="leaderboard-page fade-in">
             <div className="container">
-                <div className="page-header">
-                    <h1><FaTrophy className="trophy-icon" /> Global Leaderboard</h1>
-                    <p>Top performers in Logic & Reasoning</p>
+                <div className="page-header text-center mb-xl">
+                    <h1 className="text-gradient h1"><FaTrophy className="trophy-icon" /> Global Hall of Fame</h1>
+                    <p className="text-secondary">The world's most disciplined logical minds.</p>
                 </div>
 
-                <div className="leaderboard-card card">
+                <div className="leaderboard-container glass-card">
                     <table className="leaderboard-table">
                         <thead>
                             <tr>
-                                <th>Rank</th>
-                                <th>User</th>
-                                <th>Badge</th>
-                                <th>Score</th>
+                                <th>Position</th>
+                                <th>Master</th>
+                                <th>Specialization</th>
+                                <th>Cognitive XP</th>
                             </tr>
                         </thead>
                         <tbody>
                             {leaders.map((user) => (
-                                <tr key={user.rank} className={user.rank <= 3 ? 'top-rank' : ''}>
+                                <tr key={user.rank} className={`leader-row ${user.rank <= 3 ? 'top-tier' : ''}`}>
                                     <td className="rank-cell">
-                                        {user.rank === 1 && <FaMedal color="#FFD700" />}
-                                        {user.rank === 2 && <FaMedal color="#C0C0C0" />}
-                                        {user.rank === 3 && <FaMedal color="#CD7F32" />}
-                                        <span className="rank-number">#{user.rank}</span>
+                                        <div className="rank-badge">
+                                            {user.rank === 1 && <FaMedal color="#fbbf24" size={24} />}
+                                            {user.rank === 2 && <FaMedal color="#94a3b8" size={20} />}
+                                            {user.rank === 3 && <FaMedal color="#d97706" size={18} />}
+                                            <span className="rank-num">#{user.rank}</span>
+                                        </div>
                                     </td>
                                     <td className="user-cell">
-                                        <FaUserCircle className="user-avatar" />
-                                        {user.name}
+                                        <div className="user-info">
+                                            <FaUserCircle className="user-avatar" />
+                                            <span>{user.name}</span>
+                                        </div>
                                     </td>
-                                    <td><span className={`badge badge-${user.badge.toLowerCase().includes('master') ? 'expert' : 'intermediate'}`}>{user.badge}</span></td>
-                                    <td className="score-cell">{user.score}</td>
+                                    <td><span className={`badge ${user.rank === 1 ? 'badge-primary' : 'badge-primary'}`}>{user.badge}</span></td>
+                                    <td className="score-cell">{user.score.toLocaleString()}</td>
                                 </tr>
                             ))}
                         </tbody>

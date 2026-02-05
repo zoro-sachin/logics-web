@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaGithub, FaTwitter, FaLinkedin } from 'react-icons/fa';
+import { FaGithub, FaTwitter, FaLinkedin, FaBrain } from 'react-icons/fa';
 import './Footer.css';
 
 const Footer = () => {
@@ -8,12 +8,15 @@ const Footer = () => {
         <footer className="footer">
             <div className="container footer-grid">
                 <div className="footer-brand">
-                    <h2 className="logo">Zoro<span>.tech</span></h2>
-                    <p>Empowering minds through AI-driven logical challenges and personalized learning paths.</p>
+                    <Link to="/" className="navbar-logo mb-md d-inline-block">
+                        <span className="logo-icon"><FaBrain /></span>
+                        <span className="logo-text text-white">ZORO<span className="text-gradient">.TECH</span></span>
+                    </Link>
+                    <p className="text-secondary">Pioneering the next generation of cognitive development through curated logical puzzles and timed sprints.</p>
                     <div className="social-links">
-                        <a href="#"><FaGithub /></a>
-                        <a href="#"><FaTwitter /></a>
-                        <a href="#"><FaLinkedin /></a>
+                        <a href="#" className="glass-icon"><FaGithub /></a>
+                        <a href="#" className="glass-icon"><FaTwitter /></a>
+                        <a href="#" className="glass-icon"><FaLinkedin /></a>
                     </div>
                 </div>
 

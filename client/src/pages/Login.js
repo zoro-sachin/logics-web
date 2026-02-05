@@ -1,116 +1,80 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-// import ErrorMessage from '../components/ErrorMessage';
-import LoadingSpinner from '../components/LoadingSpinner';
-import { getValidationError } from '../utils/validators';
 import './Auth.css';
 
-/**
- * Login Page
- */
 const Login = () => {
     const [formData, setFormData] = useState({
         email: '',
         password: ''
     });
-    const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
-    const [apiError, setApiError] = useState('');
-
     const { login } = useAuth();
     const navigate = useNavigate();
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
-
-        // Clear error for this field
-        if (errors[name]) {
-            setErrors(prev => ({ ...prev, [name]: null }));
-        }
-    };
-
-    const validate = () => {
-        const newErrors = {};
-
-        const emailError = getValidationError('email', formData.email);
-        if (emailError) newErrors.email = emailError;
-
-        const passwordError = getValidationError('password', formData.password);
-        if (passwordError) newErrors.password = passwordError;
-
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
+        setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setApiError('');
-
-        if (!validate()) return;
-
         setLoading(true);
-
-        const result = await login(formData);
-
-        if (result.success) {
+        try {
+            await login(formData.email, formData.password);
             navigate('/dashboard');
-        } else {
-            setApiError(result.message || 'Login failed');
+        } catch (error) {
+            console.error('Login failed:', error);
+        } finally {
+            setLoading(false);
         }
-
-        setLoading(false);
     };
 
-    if (loading) {
-        return <LoadingSpinner message="Logging in..." />;
-    }
-
     return (
-        <div className="auth-page">
-            <div className="auth-container">
-                <div className="auth-card card fade-in">
-                    <h2 className="auth-title">Welcome Back</h2>
-                    <p className="auth-subtitle">Login to continue learning</p>
-
-                    {/* ErrorMessage removed */}
+        <div className="auth-page centered section-padding">
+            <div className="container">
+                <div className="auth-card glass-card fade-in">
+                    <div className="auth-header text-center mb-lg">
+                        <h1 className="text-gradient">Cognitive Login</h1>
+                        <p className="text-secondary">Resume your analytical evolution.</p>
+                    </div>
 
                     <form onSubmit={handleSubmit}>
                         <div className="input-group">
-                            <label htmlFor="email">Email</label>
+                            <label>Email Address</label>
                             <input
                                 type="email"
-                                id="email"
                                 name="email"
+                                placeholder="name@example.com"
                                 value={formData.email}
                                 onChange={handleChange}
-                                placeholder="Enter your email"
+                                required
                             />
-                            {errors.email && <span className="error-text">{errors.email}</span>}
                         </div>
 
                         <div className="input-group">
-                            <label htmlFor="password">Password</label>
+                            <label>Password</label>
                             <input
                                 type="password"
-                                id="password"
                                 name="password"
+                                placeholder="••••••••"
                                 value={formData.password}
                                 onChange={handleChange}
-                                placeholder="Enter your password"
+                                required
                             />
-                            {errors.password && <span className="error-text">{errors.password}</span>}
                         </div>
 
-                        <button type="submit" className="btn btn-primary btn-full">
-                            Login
+                        <button
+                            type="submit"
+                            className="btn btn-primary btn-full mt-lg"
+                            disabled={loading}
+                        >
+                            {loading ? 'Authenticating...' : 'Commence Training'}
                         </button>
                     </form>
 
-                    <p className="auth-footer">
-                        Don't have an account? <Link to="/register">Register here</Link>
-                    </p>
+                    <div className="auth-footer mt-lg text-center">
+                        <p>New to the platform? <Link to="/register" className="text-primary">Create Identity</Link></p>
+                    </div>
                 </div>
             </div>
         </div>

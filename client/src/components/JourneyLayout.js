@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import JourneySidebar from './JourneySidebar';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import './Journey.css';
 
 /**
  * Journey Layout

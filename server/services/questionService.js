@@ -125,6 +125,30 @@ class QuestionService {
             };
         }
 
+        if (category === 'boolean-logic') {
+            return {
+                category,
+                difficulty: q.difficulty || null,
+                level,
+                questionText: `Logic Evaluation: ${q.q}`,
+                options: this.shuffle(q.opts),
+                correctAnswer: q.a,
+                explanation: q.desc || `The logical expression evaluates to ${q.a}.`
+            };
+        }
+
+        if (category === 'algorithmic-logic') {
+            return {
+                category,
+                difficulty: q.difficulty || null,
+                level,
+                questionText: `Trace the Logic: ${q.q}`,
+                options: this.shuffle(q.opts),
+                correctAnswer: q.a,
+                explanation: q.desc || `Following the steps sequentially results in ${q.a}.`
+            };
+        }
+
         return {
             category,
             difficulty: q.difficulty || null,

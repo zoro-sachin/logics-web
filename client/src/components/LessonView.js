@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { generateQuestion, getExplanation } from '../services/aiService';
+import { generateQuestion, submitAnswer } from '../services/questionService';
 import { FaPlay, FaCheck, FaTimes, FaLightbulb } from 'react-icons/fa';
 
 const LessonView = ({ courseId, sectionId }) => {
@@ -42,115 +42,136 @@ const LessonView = ({ courseId, sectionId }) => {
     const handleSubmit = async () => {
         if (!selectedOption || !question) return;
 
-        const isCorrect = selectedOption === question.correctAnswer;
-
-        if (isCorrect) {
-            setFeedback({ type: 'success', message: 'Correct! Great job.' });
-            // Ideally increase level here
-        } else {
-            setFeedback({ type: 'error', message: 'Incorrect. Try again or see explanation.' });
-            try {
-                const res = await getExplanation(question._id, selectedOption);
-                if (res.success) {
-                    setFeedback(prev => ({ ...prev, explanation: res.data.explanation }));
+        setLoading(true);
+        try {
+            const response = await submitAnswer(question._id, selectedOption);
+            if (response.success) {
+                if (response.data.isCorrect) {
+                    setFeedback({
+                        type: 'success',
+                        message: 'Correct! Great job.'
+                    });
+                } else {
+                    setFeedback({
+                        type: 'error',
+                        message: 'Incorrect. Try again or see explanation.',
+                        explanation: response.data.explanation
+                    });
                 }
-            } catch (err) {
-                console.error(err);
             }
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
-        <div className="lesson-view">
-            <header className="lesson-header">
-                <h1>{lessonContent.title}</h1>
-                <div className="lesson-controls">
-                    <button
-                        className={`btn-tab ${mode === 'learn' ? 'active' : ''}`}
-                        onClick={() => setMode('learn')}
-                    >
-                        Learn
-                    </button>
-                    <button
-                        className={`btn-tab ${mode === 'practice' ? 'active' : ''}`}
-                        onClick={handleStartPractice}
-                    >
-                        Practice
-                    </button>
-                </div>
-            </header>
-
-            <div className="lesson-body">
+        <div className="lesson-view-container">
+            <div className="lesson-card-v2">
                 {mode === 'learn' ? (
-                    <div className="lesson-text">
-                        <p>{lessonContent.text}</p>
-                        <div className="start-practice-cta">
-                            <p>Ready to test your knowledge?</p>
-                            <button className="btn-primary" onClick={handleStartPractice}>
-                                <FaPlay /> Start Practice (Level {level})
+                    <div className="lesson-content-v2 fade-in">
+                        <div className="content-eyebrow">Lesson Module</div>
+                        <h1>{lessonContent.title}</h1>
+                        <div className="lesson-text-v2">
+                            <p>{lessonContent.text}</p>
+                            <p>Mastering these fundamentals is crucial for tackling advanced puzzle sets.</p>
+                        </div>
+
+                        <div className="practice-cta-v2 glass">
+                            <div className="cta-left">
+                                <h3>Ready to verify?</h3>
+                                <p className="text-secondary">Complete the exercise to move forward.</p>
+                            </div>
+                            <button className="btn btn-primary btn-lg" onClick={handleStartPractice}>
+                                <FaPlay /> Solve Challenge
                             </button>
                         </div>
                     </div>
                 ) : (
-                    <div className="practice-area">
+                    <div className="practice-arena-v2 fade-in">
                         {loading ? (
-                            <div className="loader">Generating Question with Llama 3 AI...</div>
+                            <div className="py-xl text-center">
+                                <div className="loading-spinner mx-auto mb-md"></div>
+                                <p className="text-secondary">Generating logic challenge...</p>
+                            </div>
                         ) : question ? (
-                            <div className="question-card">
-                                <div className="question-header">
-                                    <span className="badge level-badge">Level {level}</span>
-                                    <span className="badge difficulty-badge">{question.difficulty}</span>
+                            <div className="challenge-box">
+                                <div className="challenge-header mb-lg">
+                                    <div className="flex justify-between align-center">
+                                        <span className="badge badge-primary">Level {level}</span>
+                                        <button className="btn-icon" onClick={() => setMode('learn')}>
+                                            <FaTimes />
+                                        </button>
+                                    </div>
+                                    <h2 className="mt-md">{question.questionText}</h2>
                                 </div>
-                                <h3 className="question-text">{question.questionText}</h3>
-                                <div className="options-grid">
+
+                                <div className="options-stack">
                                     {question.options.map((opt, idx) => (
                                         <button
                                             key={idx}
-                                            className={`option-btn ${selectedOption === opt ? 'selected' : ''} ${feedback && opt === question.correctAnswer ? 'correct' : ''
-                                                } ${feedback && selectedOption === opt && opt !== question.correctAnswer ? 'wrong' : ''
-                                                }`}
+                                            className={`challenge-opt ${selectedOption === opt ? 'selected' : ''} ${feedback && opt === question.correctAnswer ? 'correct' : ''
+                                                } ${feedback && selectedOption === opt && opt !== question.correctAnswer ? 'wrong' : ''}`}
                                             onClick={() => !feedback && setSelectedOption(opt)}
                                             disabled={!!feedback}
                                         >
-                                            {opt}
+                                            <span className="opt-index">{String.fromCharCode(65 + idx)}</span>
+                                            <span className="opt-text">{opt}</span>
                                         </button>
                                     ))}
                                 </div>
 
                                 {feedback && (
-                                    <div className={`feedback-section ${feedback.type}`}>
-                                        <p>
-                                            {feedback.type === 'success' ? <FaCheck /> : <FaTimes />}
-                                            {feedback.message}
-                                        </p>
-                                        {feedback.explanation && (
-                                            <div className="explanation">
-                                                <FaLightbulb /> <strong>Explanation:</strong> {feedback.explanation}
+                                    <div className={`feedback-overlay-v2 ${feedback.type} mt-xl`}>
+                                        <div className="feedback-body">
+                                            <div className="feedback-title">
+                                                {feedback.type === 'success' ? <FaCheck /> : <FaTimes />}
+                                                {feedback.type === 'success' ? 'Brilliant!' : 'Not quite right'}
                                             </div>
-                                        )}
-                                        {feedback.type === 'success' && (
-                                            <button className="btn-next" onClick={() => {
-                                                setLevel(prev => prev + 1); // Auto level up
-                                                handleStartPractice();
-                                            }}>
-                                                Next Question (Level Up) &rarr;
-                                            </button>
-                                        )}
+                                            <p>{feedback.message}</p>
+                                            {feedback.explanation && (
+                                                <div className="explanation-v2">
+                                                    <strong>The Logic:</strong> {feedback.explanation}
+                                                </div>
+                                            )}
+                                            {feedback.type === 'success' && (
+                                                <button className="btn btn-primary full-width mt-lg" onClick={() => {
+                                                    setLevel(prev => prev + 1);
+                                                    handleStartPractice();
+                                                }}>
+                                                    Next Module &rarr;
+                                                </button>
+                                            )}
+                                            {feedback.type === 'error' && (
+                                                <button className="btn btn-secondary full-width mt-md" onClick={() => {
+                                                    setFeedback(null);
+                                                    setSelectedOption(null);
+                                                }}>
+                                                    Try Again
+                                                </button>
+                                            )}
+                                        </div>
                                     </div>
                                 )}
 
                                 {!feedback && (
-                                    <button
-                                        className="btn-submit"
-                                        onClick={handleSubmit}
-                                        disabled={!selectedOption}
-                                    >
-                                        Submit Answer
-                                    </button>
+                                    <div className="mt-xl">
+                                        <button
+                                            className="btn btn-primary full-width btn-lg"
+                                            onClick={handleSubmit}
+                                            disabled={!selectedOption || loading}
+                                        >
+                                            Verify Implementation
+                                        </button>
+                                    </div>
                                 )}
                             </div>
                         ) : (
-                            <div className="error-state">Failed to load question.</div>
+                            <div className="glass-card text-center py-xl">
+                                <p className="mb-md">Failed to link with logic engine.</p>
+                                <button className="btn btn-primary" onClick={handleStartPractice}>Reconnect</button>
+                            </div>
                         )}
                     </div>
                 )}

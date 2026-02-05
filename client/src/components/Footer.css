@@ -1,81 +1,88 @@
 .footer {
-    background: #0f172a;
-    color: #94a3b8;
-    padding: 80px 0 40px;
-    margin-top: 100px;
+    background: var(--bg-deep);
+    border-top: 1px solid var(--border-glass);
+    padding: 6rem 0 3rem;
+    margin-top: 8rem;
 }
 
 .footer-grid {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
-    gap: 60px;
-    margin-bottom: 60px;
-}
-
-.footer-brand h2 {
-    color: white;
-    margin-bottom: 20px;
-}
-
-.footer-brand span {
-    color: #3b82f6;
+    gap: 4rem;
+    margin-bottom: 4rem;
 }
 
 .footer-brand p {
-    max-width: 300px;
-    line-height: 1.6;
-    margin-bottom: 30px;
+    max-width: 320px;
+    line-height: 1.7;
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
 }
 
 .social-links {
     display: flex;
-    gap: 20px;
+    gap: 1rem;
 }
 
-.social-links a {
-    color: #94a3b8;
-    font-size: 24px;
-    transition: color 0.3s;
+.glass-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-glass);
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
 }
 
-.social-links a:hover {
-    color: #3b82f6;
+.glass-icon:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
 }
 
 .footer-links h3 {
-    color: white;
-    margin-bottom: 25px;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
 }
 
 .footer-links ul {
     list-style: none;
+    padding: 0;
 }
 
 .footer-links ul li {
-    margin-bottom: 12px;
+    margin-bottom: 0.75rem;
 }
 
 .footer-links ul li a {
-    color: #94a3b8;
+    color: var(--text-secondary);
     text-decoration: none;
-    transition: color 0.3s;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
 }
 
 .footer-links ul li a:hover {
-    color: white;
+    color: var(--primary);
 }
 
 .footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 40px;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border-glass);
     text-align: center;
+    color: var(--text-muted);
     font-size: 0.9rem;
 }
 
 @media (max-width: 768px) {
     .footer-grid {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 3rem;
     }
 }

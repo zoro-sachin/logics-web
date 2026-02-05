@@ -29,6 +29,8 @@ app.use('/api/questions', require('./routes/questions'));
 app.use('/api/quizzes', require('./routes/quizzes'));
 app.use('/api/leaderboard', require('./routes/leaderboard'));
 app.use('/api/certificates', require('./routes/certificates'));
+app.use('/api/games', require('./routes/games'));
+app.use('/api/analytics', require('./routes/analytics'));
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
