@@ -1,0 +1,26 @@
+.error-message {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fce8e6;
+    color: var(--danger);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing-md);
+    border-left: 4px solid var(--danger);
+    animation: slideIn 0.3s ease-out;
+}
+
+.error-close {
+    background: none;
+    border: none;
+    color: var(--danger);
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0 var(--spacing-sm);
+    line-height: 1;
+}
+
+.error-close:hover {
+    opacity: 0.7;
+}
