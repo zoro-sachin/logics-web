@@ -1,0 +1,57 @@
+.leaderboard-page {
+    padding: 20px 0;
+}
+
+.trophy-icon {
+    color: #ffd700;
+    margin-right: 10px;
+}
+
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.leaderboard-table th {
+    text-align: left;
+    padding: 15px;
+    color: var(--text-secondary);
+    font-weight: 600;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.leaderboard-table td {
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+}
+
+.top-rank {
+    background: linear-gradient(to right, rgba(255, 215, 0, 0.05), transparent);
+}
+
+.rank-cell {
+    font-weight: bold;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+}
+
+.user-avatar {
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+}
+
+.score-cell {
+    font-family: 'Monaco', monospace;
+    font-weight: bold;
+    color: var(--primary);
+}
